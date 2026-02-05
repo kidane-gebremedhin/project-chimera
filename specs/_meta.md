@@ -2,7 +2,7 @@
 
 ### Vision
 
-Project Chimera is an **autonomous influencer system** composed of goal-driven AI agents capable of:
+Project Chimera is an **autonomous influencer system** designed to operate without human intervention, managing content creation, financial transactions, and social engagement composed of goal-driven AI agents capable of:
 
 * Perceiving trends
 * Generating and publishing content
@@ -17,6 +17,8 @@ Agents are persistent digital entities, not scripts. They act continuously withi
 * Agents MUST follow the Planner–Worker–Judge hierarchy
 * No irreversible action executes without Judge approval
 * Human-in-the-Loop applies by exception, not by default
+* Agentic workflows must utilize **Model Context Protocol (MCP)** for tool discovery.
+* Agents must possess economic agency via the **Coinbase AgentKit**.
 * System must support 1,000+ concurrent agents
 * Architecture must be explainable to non-technical stakeholders
 

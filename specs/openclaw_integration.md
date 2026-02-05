@@ -1,8 +1,7 @@
-## specs/openclaw_integration.md — OpenClaw Status Publishing (Optional)
+# OpenClaw Integration Plan
 
-### Objective
-
-Enable Project Chimera agents to broadcast **availability and status** to the OpenClaw Agent Social Network.
+## Objective
+Enable Project Chimera agents to broadcast **availability and status** to the OpenClaw Agent Social Network which allows for automated sponsorship bidding.
 
 ### Status Signals
 
@@ -28,6 +27,17 @@ Each agent periodically publishes:
   "confidence_avg": 0.92
 }
 ```
+
+## Implementation Plan
+1. **Status Heartbeat:** A background task running in `uv` sends a signed JSON payload every 60 seconds.
+2. **Availability Payload:**
+   ```json
+   {
+     "agent_id": "chimera_v1",
+     "status": "idle | busy",
+     "capabilities": ["video_gen", "twitter_post"],
+     "current_bid_price": "0.05 ETH"
+   }
 
 ### Governance
 
