@@ -1,9 +1,36 @@
 [project]
 name = "project-chimera"
 version = "0.1.0"
-description = "Add your description here"
+description = """
+    Project Chimera is an **autonomous influencer system** designed to operate without human intervention, managing content creation, financial transactions, and social engagement composed of goal-driven AI agents capable of:
+
+    * Perceiving trends
+    * Generating and publishing content
+    * Interacting with humans and other agents
+    * Operating safely with minimal human oversight
+
+    Agents are persistent digital entities, not scripts. They act continuously within defined ethical, financial, and operational boundaries.
+"""
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "mcp-server-git>=2026.1.14",
 ]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=4.1.0",
+    "pytest-asyncio>=0.23.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+asyncio_mode = "auto"
