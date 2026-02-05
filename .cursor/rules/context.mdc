@@ -1,0 +1,17 @@
+# Project Chimera: Governance & Development Rules
+
+## 1. Project Context
+**This is Project Chimera, an autonomous influencer system.** All development, architectural decisions, and agent behaviors must align with the goal of creating a self-sustaining, high-integrity autonomous influencer network.
+
+---
+
+## 2. The Prime Directive
+> **NEVER generate code without checking `specs/` first.**
+
+* Before proposing or implementing any technical change, the `specs/` directory must be indexed and reviewed.
+* If a specific module or feature lacks a definition in `specs/`, you must request or create the specification before proceeding with code generation.
+
+---
+
+## 3. Traceability & Execution
+**Explain your plan before writing code.**
