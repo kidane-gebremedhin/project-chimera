@@ -10,10 +10,11 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 ## Setup
 
-1. **Install dependencies** (including dev dependencies):
+1. **Install dependencies** (sync once so `pytest` is available):
    ```bash
-   uv sync --extra dev
+   uv sync
    ```
+   The project uses a `dev` dependency group, so `uv run pytest` will use dev tools. If you see "Failed to spawn: pytest", run `uv sync` first to install them.
 
 ## Running Tests
 
