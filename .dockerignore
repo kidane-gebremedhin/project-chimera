@@ -1,0 +1,53 @@
+# .dockerignore - Exclude unnecessary files from Docker build context
+
+# Git
+.git/
+.gitignore
+
+# IDE and editor files
+.cursor/
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Python cache and virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+ENV/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Test artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Documentation (not needed in container)
+*.md
+!README.md
+
+# Research and scripts (not needed for testing)
+research/
+scripts/auto_commit.sh
+
+# Lock files (we copy uv.lock explicitly)
+# Keep uv.lock for frozen installs
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
