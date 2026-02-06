@@ -20,7 +20,8 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy dependency files first for better layer caching
-COPY pyproject.toml uv.lock .python-version ./
+# README.md required: pyproject.toml declares readme = "README.md" (hatchling validates it)
+COPY pyproject.toml uv.lock .python-version README.md ./
 
 # Install Python dependencies using uv
 # This creates a virtual environment and installs all dependencies including dev

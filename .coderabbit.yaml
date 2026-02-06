@@ -1,0 +1,64 @@
+# CodeRabbit AI Code Review - Project Chimera
+# AI governance: spec alignment, contract adherence, security, scope control
+
+language: en
+
+reviews:
+  profile: assertive
+  high_level_summary: true
+  path_filters:
+    - "specs/**"
+    - "skills/**"
+    - "tests/**"
+    - "**/*.py"
+    - "!**/__pycache__/**"
+    - "!**/.venv/**"
+
+  # Path-specific review instructions (AI reviewer checks)
+  path_instructions:
+    - path: "specs/**"
+      instructions: |
+        Specs are authoritative. When reviewing code changes elsewhere, verify they align with these specs.
+        Do not suggest changes that contradict specs/technical.md, specs/functional.md, or specs/_meta.md.
+
+    - path: "skills/**/*.py"
+      instructions: |
+        Skill implementations MUST match the contracts in skills/README.md exactly.
+        Check: function names (skill_fetch_trends, skill_generate_script, skill_generate_video, skill_publish_video),
+        input parameters and types, output structure and types, documented failure modes.
+        Flag any deviation from the JSON contracts in skills/README.md.
+
+    - path: "tests/**/*.py"
+      instructions: |
+        Tests define contracts (TDD). Do NOT suggest making tests pass with placeholder implementations or by silencing failures.
+        Test failures are expected until implementations exist. Verify tests reference correct modules (skills.*) and assert contract compliance.
+
+    - path: "**/*.py"
+      instructions: |
+        Security: Flag hardcoded secrets (API keys, passwords, tokens); use env vars or vault.
+        Flag unsafe operations: eval(), exec(), __import__ with user input, subprocess with shell=True, os.system.
+        Side effects: Publishing, transactions, or irreversible actions must follow Planner–Worker–Judge; flag uncontrolled side effects.
+        Scope: Flag code not referenced in the PR description or in specs; prefer small, reversible changes.
+
+  # Pre-merge checks
+  pre_merge_checks:
+    description:
+      mode: error
+    title:
+      mode: warning
+      requirements: "Title should be concise and descriptive; state what changed."
+
+  # Tools: security and Python quality
+  tools:
+    gitleaks:
+      enabled: true
+    ruff:
+      enabled: true
+
+# Knowledge base: use specs and skills README as review criteria
+knowledge_base:
+  code_guidelines:
+    enabled: true
+    filePatterns:
+      - "specs/**/*.md"
+      - "skills/README.md"

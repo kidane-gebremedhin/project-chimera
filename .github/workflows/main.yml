@@ -1,0 +1,55 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [master, main, develop]
+  pull_request:
+    branches: [master, main, develop]
+
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      
+      - name: Build Docker image
+        run: make setup
+      
+      - name: Run tests
+        id: test
+        continue-on-error: false
+        run: |
+          echo "🧪 Running tests (expected to fail at TDD stage)"
+          make test || {
+            echo "::warning::Tests failed (expected at TDD stage - implementations not yet added)"
+            exit 1
+          }
+      
+      - name: Validate spec structure
+        run: make spec-check
+      
+      - name: Test results summary
+        if: failure()
+        run: |
+          echo "::notice::Test failures are expected during TDD phase"
+          echo "::notice::Tests define contracts before implementation"
+          echo "::notice::See tests/README.md for details"
+
+  validate:
+    name: Validate Structure
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Validate spec structure
+        run: |
+          chmod +x scripts/spec-check.sh
+          ./scripts/spec-check.sh
