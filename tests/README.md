@@ -16,6 +16,9 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
    ```
    The project uses a `dev` dependency group, so `uv run pytest` will use dev tools. If you see "Failed to spawn: pytest", run `uv sync` first to install them.
 
+2. **(Optional) Install or update tools used in CI**  
+   The CI pipeline runs linting (ruff) and security scanning (bandit) via `uv` on demand, so you do **not** need to add them to `pyproject.toml`.
+
 ## Running Tests
 
 Run all tests:
@@ -62,4 +65,18 @@ uv run pytest tests/ --collect-only -q
 
 # Run and see failure summary
 uv run pytest tests/ -v --tb=line | grep -E "(FAILED|ERROR|test_)"
+```
+
+## Running Linting and Security Locally
+
+Run Ruff (Python linter):
+
+```bash
+uv run --with ruff ruff check .
+```
+
+Run Bandit (Python security scan). Uses `pyproject.toml` for config (B101 skipped in tests). Exclude the venv:
+
+```bash
+uv run --with bandit bandit -c pyproject.toml -r . -q -x .venv
 ```

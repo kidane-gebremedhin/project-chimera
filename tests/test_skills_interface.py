@@ -8,7 +8,6 @@ All tests are expected to fail until the implementation exists.
 """
 
 import pytest
-from typing import Any
 
 
 class TestSkillFetchTrendsInterface:

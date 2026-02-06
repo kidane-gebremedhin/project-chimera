@@ -1,4 +1,4 @@
-## specs/technical.md — Technical Specifications
+## Technical Specifications
 
 ### Agent API Contracts
 
@@ -59,7 +59,7 @@ Entities:
 * **videos**
 
   * id (uuid, PK)
-  * agent_id (FK)
+  * agent_id (FK → agents.id)
   * platform
   * status (draft | approved | published | failed)
   * duration_seconds
@@ -68,13 +68,57 @@ Entities:
 * **video_versions**
 
   * id (uuid, PK)
-  * video_id (FK)
+  * video_id (FK → videos.id)
   * media_url
   * confidence_score
   * created_at
+
+* **tasks**
+
+  * id (uuid, PK, mirrors task_id)
+  * agent_id (uuid, FK → agents.id)
+  * task_type (generate_content | reply | render_video | transact)
+  * priority (high | medium | low)
+  * goal (text)
+  * persona_constraints (jsonb or text[])
+  * resources (jsonb or text[] of mcp:// URIs)
+  * created_at (timestamp)
+
+* **results**
+
+  * id (uuid, PK)
+  * task_id (uuid, FK → tasks.id)
+  * output (text | media_url)
+  * confidence_score (float)
+  * model (text)
+  * latency_ms (integer)
+  * created_at (timestamp)
+
+* **decisions**
+
+  * id (uuid, PK)
+  * task_id (uuid, FK → tasks.id)
+  * decision (approve | reject | escalate)
+  * reason (text)
+  * decided_at (timestamp)
+
+* **agent_status**
+
+  * agent_id (uuid, PK, FK → agents.id)
+  * state (idle | working | awaiting_review)
+  * capabilities (text[])
+  * confidence_avg (float)
+  * current_bid_price (numeric, optional)
+  * updated_at (timestamp)
 
 ```mermaid
 erDiagram
     AGENTS ||--o{ VIDEOS : creates
     VIDEOS ||--o{ VIDEO_VERSIONS : has
+
+    AGENTS ||--o{ TASKS : owns
+    TASKS  ||--o{ RESULTS   : produces
+    TASKS  ||--o{ DECISIONS : evaluated_by
+
+    AGENTS ||--|| AGENT_STATUS : has_status
 ```

@@ -9,7 +9,6 @@ All tests are expected to fail until the implementation exists.
 
 import pytest
 from datetime import datetime
-from typing import Any, Dict
 
 
 class TestTrendFetcherAPI:

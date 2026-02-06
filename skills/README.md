@@ -208,4 +208,3 @@ Future skills may include:
 * `skill_publish_availability` (OpenClaw)
 
 All new skills must follow the same contract-first approach defined here.
-
