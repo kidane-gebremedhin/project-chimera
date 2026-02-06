@@ -1,3 +1,5 @@
+[Project Chimera - Specs Walkthrough](https://docs.google.com/document/d/1ZpMreNBXxPddKKplym83aw4yBbPPxuRh8_x5mPXpuBU/edit?usp=sharing)
+
 ## Project Chimera
 
 Project Chimera is an **autonomous influencer system**: a network of AI-driven agents that can perceive trends, generate content, and operate on social platforms with minimal human oversight while preserving strong safety and governance guarantees.
