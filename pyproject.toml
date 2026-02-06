@@ -2,7 +2,7 @@
 name = "project-chimera"
 version = "0.1.0"
 description = """
-    Project Chimera is an **autonomous influencer system** designed to operate without human intervention, managing content creation, financial transactions, and social engagement composed of goal-driven AI agents capable of:
+    Project Chimera is an **Autonomous AI Influencer System** designed to operate without human intervention, managing content creation, financial transactions, and social engagement composed of goal-driven AI agents capable of:
 
     * Perceiving trends
     * Generating and publishing content
@@ -45,3 +45,8 @@ python_files = ["test_*.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]
 asyncio_mode = "auto"
+
+# Bandit: skip B101 (assert_used) — assert is correct in test code (pytest)
+[tool.bandit]
+exclude_dirs = [".venv", "venv", "__pycache__"]
+skips = ["B101"]
